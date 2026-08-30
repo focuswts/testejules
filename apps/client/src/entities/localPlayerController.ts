@@ -37,6 +37,10 @@ export class LocalPlayerController {
     });
   }
 
+  public getMesh() {
+    return this.mesh;
+  }
+
   private update() {
     let moved = false;
     const dt = this.scene.getEngine().getDeltaTime() / 1000;

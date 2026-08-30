@@ -1,8 +1,8 @@
 import { Engine, Scene, Vector3, HemisphericLight, ArcRotateCamera } from "@babylonjs/core";
-import { connectToServer, room } from "./network/client";
-import { createTerrain } from "./world/terrain";
+import { connectToServer } from "./network/client";
 import { PlayerEntity } from "./entities/player";
 import { LocalPlayerController } from "./entities/localPlayerController";
+import { ChunkManager } from "./world/ChunkManager";
 
 const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
 const engine = new Engine(canvas, true);
@@ -21,12 +21,10 @@ const createScene = async () => {
   const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
   light.intensity = 0.7;
 
-  // Environment
-  createTerrain(scene);
-
   // Multiplayer State
   const playerEntities = new Map<string, PlayerEntity>();
   let localController: LocalPlayerController | null = null;
+  let chunkManager: ChunkManager | null = null;
 
   try {
     const gameRoom = await connectToServer();
@@ -45,6 +43,8 @@ const createScene = async () => {
 
       if (isLocal) {
         localController = new LocalPlayerController(entity.mesh, scene, camera);
+        chunkManager = new ChunkManager(scene, gameRoom.state.worldSeed);
+        chunkManager.update(entity.mesh.position);
       }
 
       // Listen for player updates (Server reconciliation)
@@ -70,13 +70,23 @@ const createScene = async () => {
     });
   } catch (e) {
     console.error("Failed to connect to server", e);
+    // Fallback if server connection fails
+    chunkManager = new ChunkManager(scene, "offline_fallback_seed");
+    chunkManager.update(Vector3.Zero());
   }
 
-  return scene;
+  return { scene, getLocalController: () => localController, getChunkManager: () => chunkManager };
 };
 
-createScene().then((scene) => {
+createScene().then(({ scene, getLocalController, getChunkManager }) => {
   engine.runRenderLoop(() => {
+    const localController = getLocalController();
+    const chunkManager = getChunkManager();
+
+    if (localController && chunkManager) {
+      chunkManager.update(localController.getMesh().position);
+    }
+
     scene.render();
   });
 });

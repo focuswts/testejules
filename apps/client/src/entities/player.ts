@@ -1,5 +1,5 @@
 import { Scene, MeshBuilder, StandardMaterial, Color3, Vector3, Mesh } from "@babylonjs/core";
-import { AdvancedDynamicTexture, TextBlock, Control } from "@babylonjs/gui";
+import { AdvancedDynamicTexture, TextBlock } from "@babylonjs/gui";
 import { Player } from "@survival/shared";
 
 // Create GUI texture once for all name tags
