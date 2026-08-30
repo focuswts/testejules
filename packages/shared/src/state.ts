@@ -9,5 +9,6 @@ export class Player extends Schema {
 }
 
 export class GameState extends Schema {
+  @type("string") worldSeed: string = "";
   @type({ map: Player }) players = new MapSchema<Player>();
 }

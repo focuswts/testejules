@@ -43,9 +43,15 @@ importers:
       "@survival/shared":
         specifier: workspace:*
         version: link:../../packages/shared
+      alea:
+        specifier: ^1.0.1
+        version: 1.0.1
       colyseus.js:
         specifier: ^0.15.0
         version: 0.15.28
+      simplex-noise:
+        specifier: ^4.0.3
+        version: 4.0.3
     devDependencies:
       typescript:
         specifier: ^5.0.0
@@ -1009,6 +1015,10 @@ packages:
   ajv@6.15.0:
     resolution:
       { integrity: sha512-fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw== }
+
+  alea@1.0.1:
+    resolution:
+      { integrity: sha512-QU+wv+ziDXaMxRdsQg/aH7sVfWdhKps5YP97IIwFkHCsbDZA3k87JXoZ5/iuemf4ntytzIWeScrRpae8+lDrXA== }
 
   ansi-regex@5.0.1:
     resolution:
@@ -2298,6 +2308,10 @@ packages:
       { integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw== }
     engines: { node: ">=14" }
 
+  simplex-noise@4.0.3:
+    resolution:
+      { integrity: sha512-qSE2I4AngLQG7BXqoZj51jokT4WUXe8mOBrvfOXpci8+6Yu44+/dD5zqDpOx3Ux792eamTd2lLcI8jqFntk/lg== }
+
   slash@3.0.0:
     resolution:
       { integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q== }
@@ -3331,6 +3345,8 @@ snapshots:
       fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
+
+  alea@1.0.1: {}
 
   ansi-regex@5.0.1: {}
 
@@ -4508,6 +4524,8 @@ snapshots:
   siginfo@2.0.0: {}
 
   signal-exit@4.1.0: {}
+
+  simplex-noise@4.0.3: {}
 
   slash@3.0.0: {}
 

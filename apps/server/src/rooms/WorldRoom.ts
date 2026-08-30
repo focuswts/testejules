@@ -6,7 +6,10 @@ export class WorldRoom extends Room<GameState> {
 
   onCreate(options: any) {
     console.log("WorldRoom created!", options);
-    this.setState(new GameState());
+    const state = new GameState();
+    state.worldSeed = Math.random().toString(36).substring(2, 15);
+    this.setState(state);
+    console.log("World seed set to:", state.worldSeed);
 
     this.onMessage(MESSAGES.PLAYER_MOVE, (client, data: PlayerMoveMessage) => {
       const player = this.state.players.get(client.sessionId);
@@ -19,7 +22,7 @@ export class WorldRoom extends Room<GameState> {
     });
   }
 
-  onJoin(client: Client, options: any) {
+  onJoin(client: Client) {
     console.log(client.sessionId, "joined!");
     const player = new Player();
     player.id = client.sessionId;
@@ -31,7 +34,7 @@ export class WorldRoom extends Room<GameState> {
     this.state.players.set(client.sessionId, player);
   }
 
-  onLeave(client: Client, consented: boolean) {
+  onLeave(client: Client) {
     console.log(client.sessionId, "left!");
     this.state.players.delete(client.sessionId);
   }

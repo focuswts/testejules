@@ -11,7 +11,9 @@
     "@babylonjs/gui": "7.39.0",
     "@babylonjs/loaders": "^7.39.0",
     "@survival/shared": "workspace:*",
-    "colyseus.js": "^0.15.0"
+    "alea": "^1.0.1",
+    "colyseus.js": "^0.15.0",
+    "simplex-noise": "^4.0.3"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
